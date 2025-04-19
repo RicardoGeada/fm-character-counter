@@ -18,14 +18,11 @@
   /* background image */
   --bg-image: url("./assets/images/bg-light-theme.png");
 
+  /* Header */
+  --toggle-bg: var(--color-neutral-100);
+
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* background image */
-    --bg-image: url("./assets/images/bg-dark-theme.png");
-  }
-}
 
 * {
   margin: 0;
@@ -40,6 +37,14 @@ body {
   background-repeat: no-repeat;
   min-height: 100vh;
   padding: 32px;
+
+  &.dark {
+    /* background image */
+    --bg-image: url("./assets/images/bg-dark-theme.png");
+
+    /* Header */
+    --toggle-bg: var(--color-neutral-600);
+  }
 }
 
 
