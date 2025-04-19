@@ -1,7 +1,7 @@
 @use './fonts.scss';
 
 :root {
-  /*colors*/
+  /* colors */
   --color-neutral-900: #12131a;
   --color-neutral-800: #21222c;
   --color-neutral-700: #2a2b37;
@@ -14,6 +14,17 @@
   --color-yellow-500: #ff9f00;
   --color-orange-500: #fe8159;
   --color-orange-800: #da3701;
+
+  /* background image */
+  --bg-image: url("./assets/images/bg-light-theme.png");
+  
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* background image */
+    --bg-image: url("./assets/images/bg-dark-theme.png");
+  }
 }
 
 * {
@@ -21,6 +32,13 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "DM Sans";
+}
+
+body {
+  background-image: var(--bg-image);
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 100vh;
 }
 
 
