@@ -1,0 +1,59 @@
+@use "sass:map";
+
+@font-face {
+  font-family: "DM Sans";
+  src: url("./assets/fonts/DM_Sans/DMSans-VariableFont_opsz\,wght.ttf")
+    format("truetype");
+  font-weight: 400, 600, 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+$text-presets: (
+  "1": (
+    size: 64px,
+    weight: 700,
+    line-height: 1,
+    letter-spacing: -1px,
+  ),
+  "1-mobile": (
+    size: 40px,
+    weight: 700,
+    line-height: 1,
+    letter-spacing: -1px,
+  ),
+  "2": (
+    size: 24px,
+    weight: 600,
+    line-height: 1.3,
+    letter-spacing: -1px,
+  ),
+  "3": (
+    size: 20px,
+    weight: 400,
+    line-height: 1.4,
+    letter-spacing: -0.6px,
+  ),
+  "4": (
+    size: 16px,
+    weight: 400,
+    line-height: 1.3,
+    letter-spacing: -0.6px,
+  ),
+);
+
+@mixin apply-text($name) {
+  $preset: map.get($text-presets, $name);
+  @if $preset {
+    font-size: map.get($preset, size);
+    font-weight: map.get($preset, weight);
+    line-height: map.get($preset, line-height);
+    letter-spacing: map.get($preset, letter-spacing);
+  }
+}
+
+@each $name, $style in $text-presets {
+  .text-#{$name} {
+    @include apply-text($name);
+  }
+}
