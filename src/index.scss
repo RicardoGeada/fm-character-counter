@@ -17,7 +17,7 @@
 
   /* background image */
   --bg-image: url("./assets/images/bg-light-theme.png");
-  
+
 }
 
 @media (prefers-color-scheme: dark) {
@@ -39,6 +39,7 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   min-height: 100vh;
+  padding: 32px;
 }
 
 
