@@ -13,8 +13,8 @@ function Header() {
 
     return (
         <header className={styles["header"]}>
-            <img src={theme == "light" ? logo_light : logo_dark} alt="logo" />
-            <button className={styles["light-dark-toggle"]} onClick={toggleTheme}>
+            <img className={styles["logo"]} src={theme == "light" ? logo_light : logo_dark} alt="character counter logo" />
+            <button className={styles["light-dark-toggle"]} onClick={toggleTheme} aria-label={`Toggle to ${theme} mode.`}>
                 <img src={theme == "light" ? moon : sun} alt="" />
             </button>
         </header>
