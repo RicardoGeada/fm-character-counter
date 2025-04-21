@@ -3,10 +3,11 @@ import infoIcon from "./../../assets/images/icon-info.svg";
 
 interface TextareaProps {
   value: string;
-  onChange: (value: string) => void;
+  onChangeText: (value: string) => void;
+  onChangeExcludeSpace: () => void;
 }
 
-const Textarea: React.FC<TextareaProps> = ({ value, onChange }) => {
+const Textarea: React.FC<TextareaProps> = ({ value, onChangeText, onChangeExcludeSpace }) => {
 
   return (
     <div className={styles["textarea-container"]}>
@@ -15,7 +16,7 @@ const Textarea: React.FC<TextareaProps> = ({ value, onChange }) => {
         className={`${styles["textarea"]} text-3`}
         placeholder="Start typing here… (or paste your text)"
         value={value}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={(e) => onChangeText(e.target.value)}
       ></textarea>
 
       <div className={`${styles["error-message"]} text-4`}>
@@ -25,7 +26,7 @@ const Textarea: React.FC<TextareaProps> = ({ value, onChange }) => {
 
       <div className={`${styles["textarea-settings"]} text-4`}>
         <label className={styles["checkbox-label"]}>
-            <input type="checkbox"/>
+            <input type="checkbox" onChange={onChangeExcludeSpace}/>
             <span>Exclude Spaces</span>
         </label>
         <label className={styles["checkbox-label"]}>
