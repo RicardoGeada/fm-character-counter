@@ -5,12 +5,14 @@ import { useState } from "react";
 interface TextareaProps {
   text: string;
   onChangeText: (value: string) => void;
+  excludeSpaces: boolean;
   onChangeExcludeSpace: () => void;
 }
 
 const Textarea: React.FC<TextareaProps> = ({
   text,
   onChangeText,
+  excludeSpaces,
   onChangeExcludeSpace,
 }) => {
   const [characterLimit, setCharacterLimit] = useState({
@@ -22,7 +24,7 @@ const Textarea: React.FC<TextareaProps> = ({
     setCharacterLimit((prev) => {
       return {
         state: !prev.state,
-        value: prev.state ? prev.value : text.length,
+        value: prev.state ? prev.value : textLength(),
       };
     });
   }
@@ -36,8 +38,12 @@ const Textarea: React.FC<TextareaProps> = ({
     });
   }
 
+  function textLength(): number {
+    return excludeSpaces ? text.replace(/\s+/g,"").length : text.length;
+  }
+
   function isInvalid(): boolean {
-    return characterLimit.state && text.length > characterLimit.value;
+    return characterLimit.state && textLength() > characterLimit.value;
   }
 
   return (
