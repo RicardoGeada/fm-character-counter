@@ -25,7 +25,7 @@ function App() {
       <Header />
       <main className="main-content">
         <h1 className="headline text-1">Analyze your text in real-time.</h1>
-        <Textarea value={text} onChangeText={handleTextInput} onChangeExcludeSpace={handleExcludeSpacesCheck}/>
+        <Textarea text={text} onChangeText={handleTextInput} onChangeExcludeSpace={handleExcludeSpacesCheck}/>
       </main>
     </div>
   );

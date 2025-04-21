@@ -26,10 +26,12 @@
     box-shadow: 0 0 10px 0 var(--textarea-border-focus);
   }
 
-  &:invalid {
-    background-color: var(--textarea-bg-error);
-    border-color: var(--textarea-border-error);
-    box-shadow: 0 0 10px 0 var(--textarea-border-error);
+  &:invalid,
+  &--invalid {
+    @extend .textarea;
+    background-color: var(--textarea-bg-error) !important;
+    border-color: var(--textarea-border-error) !important;
+    box-shadow: 0 0 10px 0 var(--textarea-border-error) !important;
   }
 
   &::-webkit-resizer {
