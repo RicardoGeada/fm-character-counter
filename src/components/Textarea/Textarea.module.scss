@@ -1,5 +1,6 @@
 .textarea-container {
   width: 100%;
+  color: var(--color-textarea);
 }
 
 .textarea {
@@ -8,11 +9,11 @@
   border-radius: 12px;
   background-color: var(--textarea-bg);
   border: 2px solid var(--textarea-border);
-  color: var(--color-textarea);
   height: 200px;
   width: 100%;
   max-width: 990px;
   resize: none;
+  color: var(--color-textarea);
 
   &:hover {
     background-color: var(--textarea-bg-hover);
@@ -41,4 +42,85 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  margin-top: 12px;
+}
+
+
+.textarea-settings {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+
+  :nth-child(2) {
+    margin-right: auto;
+  }
+}
+
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: fit-content;
+}
+
+input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 1px solid var(--color-checkbox-border);
+  border-radius: 4px;
+  cursor: pointer;
+
+  &:hover {
+    border-color: var(--color-checkbox-border-hover);
+  }
+
+  &:focus {
+    outline: transparent;
+    background-color: var(--color-neutral-0);
+    border-color: var(--color-neutral-200);
+    box-shadow: 0 0 0 2px var(--color-neutral-0),
+                0 0 0 4px var(--color-purple-400);
+  }
+
+  &:checked {
+    background-color: var(--color-purple-400);
+    border: none;
+    background-image: url("./../../assets/images/icon-check.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+}
+
+
+input[type="number"] {
+  padding: 4px 12px;
+  border: 1px solid var(--color-neutral-600);
+  border-radius: 6px;
+  width: min-content;
+  min-width: 0;
+  text-align: center;
+  background-color: transparent;
+  color: var(--color-textarea);
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  &:focus {
+    outline: transparent;
+  }
+}
+
+
+@media (max-width: 576px) {
+  .textarea-settings {
+    gap: 12px;
+  }
 }

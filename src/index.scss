@@ -34,6 +34,10 @@
   --textarea-border-hover: var(--color-neutral-200);
   --textarea-border-focus: var(--color-purple-400);
   --textarea-border-error: var(--color-orange-800);
+
+  /* input checkbox */
+  --color-checkbox-border: var(--color-neutral-900);
+  --color-checkbox-border-hover: var(--color-neutral-600);
 }
 
 * {
@@ -69,5 +73,9 @@ body {
     --textarea-border-hover: var(--color-neutral-600);
     --textarea-border-focus: var(--color-purple-500);
     --textarea-border-error: var(--color-orange-500);
+
+    /* input checkbox */
+    --color-checkbox-border: var(--color-neutral-200);
+    --color-checkbox-border-hover: var(--color-neutral-0);
   }
 }
