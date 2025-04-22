@@ -15,16 +15,17 @@ const Textarea: React.FC<TextareaProps> = ({
   excludeSpaces,
   onChangeExcludeSpace,
 }) => {
-  const [characterLimit, setCharacterLimit] = useState({
-    state: false,
-    value: 0,
-  });
+  
+  const [characterLimit, setCharacterLimit] = useState({state: false, value: 0});
+  const readingTime = useMemo(() => calculateReadingTime(text), [text]);
+  const currentTextLength = excludeSpaces ? text.replace(/\s+/g, "").length : text.length;
+  const isInvalid = characterLimit.state && currentTextLength > characterLimit.value;
 
   function handleSetCharacterLimitState() {
     setCharacterLimit((prev) => {
       return {
         state: !prev.state,
-        value: prev.state ? prev.value : textLength(),
+        value: prev.state ? prev.value : currentTextLength,
       };
     });
   }
@@ -51,31 +52,21 @@ const Textarea: React.FC<TextareaProps> = ({
     return Math.ceil(wordCount / wordsPerMinute);
   }
 
-  const readingTime = useMemo(() => calculateReadingTime(text), [text]);
-
-  function textLength(): number {
-    return excludeSpaces ? text.replace(/\s+/g, "").length : text.length;
-  }
-
-  function isInvalid(): boolean {
-    return characterLimit.state && textLength() > characterLimit.value;
-  }
-
   return (
     <div className={styles["textarea-container"]}>
       <textarea
         className={`${
-          isInvalid() ? styles["textarea--invalid"] : styles["textarea"]
+          isInvalid ? styles["textarea--invalid"] : styles["textarea"]
         } text-3`}
         placeholder="Start typing here… (or paste your text)"
         value={text}
         onChange={(e) => {
           onChangeText(e.target.value);
         }}
-        aria-invalid={isInvalid()}
+        aria-invalid={isInvalid}
       ></textarea>
 
-      {isInvalid() && (
+      {isInvalid && (
         <div className={`${styles["error-message"]} text-4`}>
           <img src={infoIcon} alt="" />
           <span>
