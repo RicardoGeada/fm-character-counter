@@ -15,7 +15,7 @@ const Textarea: React.FC<TextareaProps> = ({
   excludeSpaces,
   onChangeExcludeSpace,
 }) => {
-  
+
   const [characterLimit, setCharacterLimit] = useState({state: false, value: 0});
   const readingTime = useMemo(() => calculateReadingTime(text), [text]);
   const currentTextLength = excludeSpaces ? text.replace(/\s+/g, "").length : text.length;
@@ -31,10 +31,11 @@ const Textarea: React.FC<TextareaProps> = ({
   }
 
   function handleSetCharacterLimitValue(newValue: number) {
+    const safeValue = Math.min(newValue, 1000000);
     setCharacterLimit((prev) => {
       return {
         ...prev,
-        value: newValue,
+        value: safeValue,
       };
     });
   }
@@ -85,13 +86,16 @@ const Textarea: React.FC<TextareaProps> = ({
           <input type="checkbox" onChange={handleSetCharacterLimitState} />
           <span>Set Character Limit</span>
           {characterLimit.state && (
-            <input
+            <div className={styles["input-wrapper"]}>
+              <span>{characterLimit.value}</span>
+              <input
               type="number"
               min={0}
-              max={999}
+              max={1000000}
               onChange={(e) => handleSetCharacterLimitValue(+e.target.value)}
               value={characterLimit.value}
             />
+            </div>
           )}
         </label>
 
