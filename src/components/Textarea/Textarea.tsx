@@ -1,6 +1,6 @@
 import styles from "./Textarea.module.scss";
 import infoIcon from "./../../assets/images/icon-info.svg";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 interface TextareaProps {
   text: string;
@@ -38,8 +38,23 @@ const Textarea: React.FC<TextareaProps> = ({
     });
   }
 
+  function calculateReadingTime(text: string): number {
+    const wordsPerMinute = 200;
+    let cleanedText;
+    try {
+      cleanedText = text.replace(/[^\p{L}\p{N}\s]/gu, "");
+    } catch {
+      cleanedText = text.replace(/[^a-zA-ZäöüÄÖÜß0-9\s]/g, "");
+    }
+    const words = cleanedText.trim().split(/\s+/);
+    const wordCount = words.filter((word) => word.length > 0).length;
+    return Math.ceil(wordCount / wordsPerMinute);
+  }
+
+  const readingTime = useMemo(() => calculateReadingTime(text), [text]);
+
   function textLength(): number {
-    return excludeSpaces ? text.replace(/\s+/g,"").length : text.length;
+    return excludeSpaces ? text.replace(/\s+/g, "").length : text.length;
   }
 
   function isInvalid(): boolean {
@@ -48,24 +63,28 @@ const Textarea: React.FC<TextareaProps> = ({
 
   return (
     <div className={styles["textarea-container"]}>
-
       <textarea
-        className={`${isInvalid() ? styles["textarea--invalid"] : styles["textarea"]} text-3`}
+        className={`${
+          isInvalid() ? styles["textarea--invalid"] : styles["textarea"]
+        } text-3`}
         placeholder="Start typing here… (or paste your text)"
         value={text}
-        onChange={(e) => onChangeText(e.target.value)}
+        onChange={(e) => {
+          onChangeText(e.target.value);
+        }}
         aria-invalid={isInvalid()}
       ></textarea>
 
       {isInvalid() && (
         <div className={`${styles["error-message"]} text-4`}>
           <img src={infoIcon} alt="" />
-          <span>Limit reached! Your text exceeds { characterLimit.value } characters.</span>
+          <span>
+            Limit reached! Your text exceeds {characterLimit.value} characters.
+          </span>
         </div>
       )}
 
       <div className={`${styles["textarea-settings"]} text-4`}>
-
         <label className={styles["checkbox-label"]}>
           <input type="checkbox" onChange={onChangeExcludeSpace} />
           <span>Exclude Spaces</span>
@@ -85,8 +104,9 @@ const Textarea: React.FC<TextareaProps> = ({
           )}
         </label>
 
-        <span>Approx. reading time: 0 minute</span>
-
+        <span>
+          Approx. reading time: {readingTime > 0 ? '<' : ''} {readingTime} {readingTime > 1 ? 'minutes' : 'minute'}
+        </span>
       </div>
     </div>
   );

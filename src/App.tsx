@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./App.scss";
 import Header from "./components/Header/Header";
 import Textarea from "./components/Textarea/Textarea";
@@ -15,10 +15,6 @@ function App() {
   function handleExcludeSpacesCheck() {
     setExcludeSpaces(prev => !prev)
   }
-
-  useEffect(() => {
-    console.log(excludeSpaces);
-  }, [excludeSpaces])
 
   return (
     <div className="content">
