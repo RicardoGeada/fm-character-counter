@@ -88,7 +88,10 @@ const Textarea: React.FC<TextareaProps> = ({
 
   return (
     <div className={styles["textarea-container"]}>
+
+      <label htmlFor="text-input" className="sr-only">Text input area</label>
       <textarea
+        id="text-input"
         className={`${
           isInvalid ? styles["textarea--invalid"] : styles["textarea"]
         } text-3`}
@@ -101,8 +104,8 @@ const Textarea: React.FC<TextareaProps> = ({
       ></textarea>
 
       {isInvalid && (
-        <div className={`${styles["error-message"]} text-4`}>
-          <img src={infoIcon} alt="" />
+        <div className={`${styles["error-message"]} text-4`} role="alert" aria-live="assertive">
+          <img src={infoIcon} alt="" aria-hidden="true"/>
           <span>
             Limit reached! Your text exceeds {characterLimit.value} characters.
           </span>
@@ -111,17 +114,19 @@ const Textarea: React.FC<TextareaProps> = ({
 
       <div className={`${styles["textarea-settings"]} text-4`}>
         <label className={styles["checkbox-label"]}>
-          <input type="checkbox" onChange={onChangeExcludeSpace} />
+          <input id="excludeSpacesCheckbox" type="checkbox" onChange={onChangeExcludeSpace} />
           <span>Exclude Spaces</span>
         </label>
 
         <label className={styles["checkbox-label"]}>
-          <input type="checkbox" onChange={handleSetCharacterLimitState} />
+          <input id="setCharacterLimitCheckbox" type="checkbox" onChange={handleSetCharacterLimitState} />
           <span>Set Character Limit</span>
           {characterLimit.state && (
             <div className={styles["input-wrapper"]}>
               <span>{characterLimit.value}</span>
+              <label htmlFor="char-limit-input" className="sr-only">Character Limit Input</label>
               <input
+                id="characterLimitInput"
                 type="number"
                 min={0}
                 max={1000000}
