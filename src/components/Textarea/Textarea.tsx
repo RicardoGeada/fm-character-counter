@@ -2,6 +2,13 @@ import styles from "./Textarea.module.scss";
 import infoIcon from "./../../assets/images/icon-info.svg";
 import { useMemo, useState } from "react";
 
+/**
+ * Props for the Textarea component.
+ * @property {string} text - The current text value of the textarea.
+ * @property {(value: string) => void} onChangeText - Callback triggered when the text changes.
+ * @property {boolean} excludeSpaces - If true, spaces are excluded from character count.
+ * @property {() => void} onChangeExcludeSpace - Callback to toggle space exclusion.
+ */
 interface TextareaProps {
   text: string;
   onChangeText: (value: string) => void;
@@ -16,20 +23,31 @@ const Textarea: React.FC<TextareaProps> = ({
   onChangeExcludeSpace,
 }) => {
 
-  const [characterLimit, setCharacterLimit] = useState({state: false, value: 0});
+  const [characterLimit, setCharacterLimit] = useState({ state: false, value: 0 });
   const readingTime = useMemo(() => calculateReadingTime(text), [text]);
   const currentTextLength = excludeSpaces ? text.replace(/\s+/g, "").length : text.length;
   const isInvalid = characterLimit.state && currentTextLength > characterLimit.value;
 
+  /**
+   * Toggles the character limit feature.
+   * Sets the current text length as the new limit.
+   * 
+   */
   function handleSetCharacterLimitState() {
     setCharacterLimit((prev) => {
       return {
         state: !prev.state,
-        value: prev.state ? prev.value : currentTextLength,
+        value: currentTextLength,
       };
     });
   }
 
+  /**
+   * Sets a new value for the character limit.
+   * Ensures that the limit does not exceed a maximum threshold (1,000,000).
+   * 
+   * @param {number} newValue - New value for the character limit.
+   */
   function handleSetCharacterLimitValue(newValue: number) {
     const safeValue = Math.min(newValue, 1000000);
     setCharacterLimit((prev) => {
@@ -40,12 +58,27 @@ const Textarea: React.FC<TextareaProps> = ({
     });
   }
 
+  /**
+   * Calculates estimated reading time in minutes.
+   *
+   * Uses a basic algorithm assuming 200 words per minute reading speed.
+   * It removes special characters before counting the words.
+   *
+   * Unicode-aware character filtering is used where supported.
+   * Falls back to a simpler regex if Unicode property escapes aren't supported
+   * (e.g. in some older browsers or JS engines).
+   *
+   * @param {string} text - The text to evaluate.
+   * @returns {number} Estimated reading time in minutes.
+   */
   function calculateReadingTime(text: string): number {
     const wordsPerMinute = 200;
     let cleanedText;
     try {
+      // Unicode-aware: removes all but letters, numbers, and whitespace
       cleanedText = text.replace(/[^\p{L}\p{N}\s]/gu, "");
     } catch {
+      // Fallback for environments that don't support Unicode regex
       cleanedText = text.replace(/[^a-zA-ZäöüÄÖÜß0-9\s]/g, "");
     }
     const words = cleanedText.trim().split(/\s+/);
@@ -89,18 +122,19 @@ const Textarea: React.FC<TextareaProps> = ({
             <div className={styles["input-wrapper"]}>
               <span>{characterLimit.value}</span>
               <input
-              type="number"
-              min={0}
-              max={1000000}
-              onChange={(e) => handleSetCharacterLimitValue(+e.target.value)}
-              value={characterLimit.value}
-            />
+                type="number"
+                min={0}
+                max={1000000}
+                onChange={(e) => handleSetCharacterLimitValue(+e.target.value)}
+                value={characterLimit.value}
+              />
             </div>
           )}
         </label>
 
         <span>
-          Approx. reading time: {readingTime > 0 ? '<' : ''} {readingTime} {readingTime > 1 ? 'minutes' : 'minute'}
+          Approx. reading time: {readingTime > 0 ? "<" : ""} {readingTime}{" "}
+          {readingTime > 1 ? "minutes" : "minute"}
         </span>
       </div>
     </div>
