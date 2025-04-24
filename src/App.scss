@@ -1,3 +1,5 @@
+@use "./fonts";
+
 .content {
   max-width: 990px;
   margin: 0 auto;
@@ -16,6 +18,64 @@
   color: var(--color-headline);
   text-align: center;
   max-width: 510px;
+}
+
+/* stats */
+.stat-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.stat {
+  padding: 16px;
+  border-radius: 12px;
+  background-position: right;
+  background-size: contain;
+  background-repeat: no-repeat;
+  flex-grow: 1;
+
+  &-value {
+    @include fonts.apply-text("1");
+  }
+
+  &-title {
+    @include fonts.apply-text("3");
+  }
+
+  &--total-characters {
+    @extend .stat;
+    background-image: url("./assets/images/pattern-character-count.svg");
+    background-color: var(--color-purple-400);
+  }
+
+  &--word-count {
+    @extend .stat;
+    background-image: url("./assets/images/pattern-word-count.svg");
+    background-color: var(--color-yellow-500);
+  }
+
+  &--sentence-count {
+    @extend .stat;
+    background-image: url("./assets/images/pattern-sentence-count.svg");
+    background-color: var(--color-orange-500);
+  }
+}
+
+@media (max-width: 768px) {
+  .stat-container {
+    flex-direction: column;
+  }
+
+  .stat {
+    width: 100%;
+    &-value {
+      @include fonts.apply-text("1-mobile");
+    }
+  }
 }
 
 @media (max-width: 576px) {
