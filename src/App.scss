@@ -28,7 +28,7 @@
 .stat-container {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: stretch;
   gap: 16px;
   width: 100%;
   flex-wrap: wrap;
@@ -40,7 +40,7 @@
   background-position: right;
   background-size: contain;
   background-repeat: no-repeat;
-  flex-grow: 1;
+  flex: 1;
 
   &-value {
     @include fonts.apply-text("1");

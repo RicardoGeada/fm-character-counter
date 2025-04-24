@@ -7,6 +7,8 @@ function App() {
   const [text, setText] = useState<string>("");
   const [excludeSpaces, setExcludeSpaces] = useState<boolean>(false);
 
+  const totalCharacters = excludeSpaces ? text.replace(/\s+/g, "").length : text.length;
+
   function handleTextInput(newText: string) {
     setText(newText);
   }
@@ -30,8 +32,8 @@ function App() {
           <h2 id="stats-heading" className="sr-only">Text Statistics</h2>
           <dl className="stat-container">
             <div className="stat--total-characters">
-              <dt className="stat-value">00</dt>
-              <dd className="stat-title">Total Characters</dd>
+              <dt className="stat-value">{ totalCharacters }</dt>
+              <dd className="stat-title">Total Characters {excludeSpaces ? "(no space)" : ""}</dd>
             </div>
 
             <div className="stat--word-count">
