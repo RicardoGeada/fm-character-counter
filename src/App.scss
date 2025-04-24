@@ -21,6 +21,10 @@
 }
 
 /* stats */
+.stats-section {
+  width: 100%;
+}
+
 .stat-container {
   display: flex;
   justify-content: space-between;
@@ -71,7 +75,7 @@
   }
 
   .stat {
-    width: 100%;
+      width: 100%;
     &-value {
       @include fonts.apply-text("1-mobile");
     }
