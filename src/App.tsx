@@ -2,16 +2,15 @@ import { useMemo, useState } from "react";
 import "./App.scss";
 import Header from "./components/Header/Header";
 import Textarea from "./components/Textarea/Textarea";
-import getWordCount from "./utils/wordcount";
+import { getCharactersCount, getSentenceCount, getWordCount } from "./utils/textStats";
 
 function App() {
   const [text, setText] = useState<string>("");
   const [excludeSpaces, setExcludeSpaces] = useState<boolean>(false);
 
-  const totalCharacters = excludeSpaces
-    ? text.replace(/\s+/g, "").length
-    : text.length;
+  const totalCharacters = useMemo(() => getCharactersCount(text, excludeSpaces), [text, excludeSpaces]);
   const wordCount = useMemo(() => getWordCount(text), [text]);
+  const sentenceCount = useMemo(() => getSentenceCount(text), [text])
 
   function handleTextInput(newText: string) {
     setText(newText);
@@ -29,8 +28,9 @@ function App() {
         <Textarea
           text={text}
           onChangeText={handleTextInput}
-          excludeSpaces={excludeSpaces}
           onChangeExcludeSpace={handleExcludeSpacesCheck}
+          totalCharacters={totalCharacters}
+          wordCount={wordCount}
         />
         <section className="stats-section" aria-labelledby="stats-heading">
           <h2 id="stats-heading" className="sr-only">
@@ -50,7 +50,7 @@ function App() {
             </div>
 
             <div className="stat--sentence-count">
-              <dt className="stat-value">00</dt>
+              <dt className="stat-value">{sentenceCount}</dt>
               <dd className="stat-title">Sentence Count</dd>
             </div>
           </dl>

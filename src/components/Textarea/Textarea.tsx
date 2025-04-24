@@ -1,33 +1,35 @@
 import styles from "./Textarea.module.scss";
 import infoIcon from "./../../assets/images/icon-info.svg";
-import { useMemo, useState } from "react";
-import getWordCount from "../../utils/wordcount";
+import { useState } from "react";
+
 
 /**
  * Props for the Textarea component.
  * @property {string} text - The current text value of the textarea.
  * @property {(value: string) => void} onChangeText - Callback triggered when the text changes.
- * @property {boolean} excludeSpaces - If true, spaces are excluded from character count.
  * @property {() => void} onChangeExcludeSpace - Callback to toggle space exclusion.
+ * @property {number} totalCharacters - The total characters in the text including/excluding spaces.
+ * @property {number} wordCount - The total words in the text..
  */
 interface TextareaProps {
   text: string;
   onChangeText: (value: string) => void;
-  excludeSpaces: boolean;
   onChangeExcludeSpace: () => void;
+  totalCharacters: number;
+  wordCount: number;
 }
 
 const Textarea: React.FC<TextareaProps> = ({
   text,
   onChangeText,
-  excludeSpaces,
   onChangeExcludeSpace,
+  totalCharacters,
+  wordCount
 }) => {
 
   const [characterLimit, setCharacterLimit] = useState({ state: false, value: 0 });
-  const readingTime = useMemo(() => calculateReadingTime(text), [text]);
-  const currentTextLength = excludeSpaces ? text.replace(/\s+/g, "").length : text.length;
-  const isInvalid = characterLimit.state && currentTextLength > characterLimit.value;
+  const readingTime = Math.ceil(wordCount / 200);
+  const isInvalid = characterLimit.state && totalCharacters > characterLimit.value;
 
   /**
    * Toggles the character limit feature.
@@ -38,7 +40,7 @@ const Textarea: React.FC<TextareaProps> = ({
     setCharacterLimit((prev) => {
       return {
         state: !prev.state,
-        value: currentTextLength,
+        value: totalCharacters,
       };
     });
   }
@@ -57,20 +59,6 @@ const Textarea: React.FC<TextareaProps> = ({
         value: safeValue,
       };
     });
-  }
-
-  /**
-   * Calculates estimated reading time in minutes.
-   *
-   * Uses a basic algorithm assuming 200 words per minute reading speed.
-   *
-   * @param {string} text - The text to evaluate.
-   * @returns {number} Estimated reading time in minutes.
-   */
-  function calculateReadingTime(text: string): number {
-    const wordsPerMinute = 200;
-    const wordCount = getWordCount(text);
-    return Math.ceil(wordCount / wordsPerMinute);
   }
 
   return (
