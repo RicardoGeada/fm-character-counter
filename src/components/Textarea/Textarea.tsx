@@ -1,6 +1,7 @@
 import styles from "./Textarea.module.scss";
 import infoIcon from "./../../assets/images/icon-info.svg";
 import { useMemo, useState } from "react";
+import getWordCount from "../../utils/wordcount";
 
 /**
  * Props for the Textarea component.
@@ -62,27 +63,13 @@ const Textarea: React.FC<TextareaProps> = ({
    * Calculates estimated reading time in minutes.
    *
    * Uses a basic algorithm assuming 200 words per minute reading speed.
-   * It removes special characters before counting the words.
-   *
-   * Unicode-aware character filtering is used where supported.
-   * Falls back to a simpler regex if Unicode property escapes aren't supported
-   * (e.g. in some older browsers or JS engines).
    *
    * @param {string} text - The text to evaluate.
    * @returns {number} Estimated reading time in minutes.
    */
   function calculateReadingTime(text: string): number {
     const wordsPerMinute = 200;
-    let cleanedText;
-    try {
-      // Unicode-aware: removes all but letters, numbers, and whitespace
-      cleanedText = text.replace(/[^\p{L}\p{N}\s]/gu, "");
-    } catch {
-      // Fallback for environments that don't support Unicode regex
-      cleanedText = text.replace(/[^a-zA-ZäöüÄÖÜß0-9\s]/g, "");
-    }
-    const words = cleanedText.trim().split(/\s+/);
-    const wordCount = words.filter((word) => word.length > 0).length;
+    const wordCount = getWordCount(text);
     return Math.ceil(wordCount / wordsPerMinute);
   }
 
