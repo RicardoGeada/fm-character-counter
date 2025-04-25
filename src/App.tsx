@@ -23,8 +23,10 @@ function App() {
   return (
     <div className="content">
       <Header />
+
       <main className="main-content">
         <h1 className="headline text-1">Analyze your text in real-time.</h1>
+
         <Textarea
           text={text}
           onChangeText={handleTextInput}
@@ -32,6 +34,7 @@ function App() {
           totalCharacters={totalCharacters}
           wordCount={wordCount}
         />
+
         <section className="stats-section" aria-labelledby="stats-heading">
           <h2 id="stats-heading" className="sr-only">
             Text Statistics
@@ -55,6 +58,7 @@ function App() {
             </div>
           </dl>
         </section>
+        
       </main>
     </div>
   );

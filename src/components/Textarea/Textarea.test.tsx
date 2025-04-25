@@ -1,5 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import Textarea from "./Textarea";
+import { getCharactersCount, getWordCount } from "../../utils/textStats";
 
 describe("Textarea component", () => {
 
@@ -10,6 +11,8 @@ describe("Textarea component", () => {
       onChangeText: jest.fn(),
       excludeSpaces: false,
       onChangeExcludeSpace: jest.fn(),
+      totalCharacters: getCharactersCount("Default text", false),
+      wordCount: getWordCount("Default text"),
     };
     const props = { ...defaultProps, ...overrides };
     render(<Textarea {...props} />);
@@ -41,7 +44,7 @@ describe("Textarea component", () => {
 
 
   test("should not display error if text without spaces is under limit", () => {
-    setup({ text: '123 456789', excludeSpaces: true });
+    setup({ text: '123 456789', excludeSpaces: true, totalCharacters: getCharactersCount('123 456789', true) });
 
     // set character limit
     fireEvent.click(screen.getByLabelText("Set Character Limit"));
@@ -54,7 +57,7 @@ describe("Textarea component", () => {
 
 
   test("should display estimated reading time of '0 minute'", () => {
-    setup({text: ''})
+    setup({text: '', wordCount: getWordCount('')})
     expect(screen.getByText(/Approx. reading time/)).toHaveTextContent('Approx. reading time: 0 minute');
   });
 
@@ -67,7 +70,7 @@ describe("Textarea component", () => {
 
   test("should display estimated reading time of '< 2 minute'", () => {
     const fourHundredWords = Array(400).fill("word").join(" ");
-    setup({text: fourHundredWords})
+    setup({text: fourHundredWords, wordCount: getWordCount(fourHundredWords)})
     expect(screen.getByText(/Approx. reading time/)).toHaveTextContent('Approx. reading time: < 2 minutes');
   });
 
