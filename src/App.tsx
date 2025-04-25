@@ -3,6 +3,7 @@ import "./App.scss";
 import Header from "./components/Header/Header";
 import Textarea from "./components/Textarea/Textarea";
 import { getCharactersCount, getSentenceCount, getWordCount } from "./utils/textStats";
+import LetterDensity from "./components/LetterDensity/LetterDensity";
 
 function App() {
   const [text, setText] = useState<string>("");
@@ -58,6 +59,8 @@ function App() {
             </div>
           </dl>
         </section>
+
+        <LetterDensity text={text} />
         
       </main>
     </div>

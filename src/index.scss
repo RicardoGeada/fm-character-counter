@@ -24,6 +24,8 @@
   /* Fonts */
   --color-headline: var(--color-neutral-900);
   --color-textarea: var(--color-neutral-700);
+  --color-letter-density-notification: var(--color-neutral-900);
+  --color-letter-density-notification: var(--color-neutral-600);
 
   /* Textarea */
   --textarea-bg: var(--color-neutral-100);
@@ -63,6 +65,8 @@ body {
     /* Fonts */
     --color-headline: var(--color-neutral-100);
     --color-textarea: var(--color-neutral-200);
+    --color-letter-density: var(--color-neutral-200);
+    --color-letter-density-notification: var(--color-neutral-200);
 
     /* Textarea */
     --textarea-bg: var(--color-neutral-800);
