@@ -40,6 +40,9 @@
   /* input checkbox */
   --color-checkbox-border: var(--color-neutral-900);
   --color-checkbox-border-hover: var(--color-neutral-600);
+
+  /* letter density */
+  --ld-progress-bar-bg: var(--color-neutral-100);
 }
 
 * {
@@ -81,6 +84,9 @@ body {
     /* input checkbox */
     --color-checkbox-border: var(--color-neutral-200);
     --color-checkbox-border-hover: var(--color-neutral-0);
+
+    /* letter density */
+    --ld-progress-bar-bg: var(--color-neutral-800); 
   }
 }
 
