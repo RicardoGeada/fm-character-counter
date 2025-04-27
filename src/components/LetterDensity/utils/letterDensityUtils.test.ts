@@ -1,4 +1,4 @@
-import { getUniqueLetters } from "./letterDensityUtils";
+import { getLetterCount, getUniqueLetters } from "./letterDensityUtils";
 
 describe("getUniqueLetters", () => {
 
@@ -27,5 +27,37 @@ describe("getUniqueLetters", () => {
         expect(array).toStrictEqual([]);
       })
 
-}) 
+});
+
+
+describe("getLetterCount", () => {
+
+    test("should count how often a specific character occurs in a text", () => {
+        const text = "ABC. abca";
+        const letter = "A";
+        const total = getLetterCount(text, letter);
+        expect(total).toStrictEqual(3);
+    })
+
+    test("should be case insensitive when counting characters", () => {
+        const text = "ABC. abca";
+        const letter = "a";
+        const total = getLetterCount(text, letter);
+        expect(total).toStrictEqual(3);
+    })
+
+    test("should count non-alphabetic characters correctly", () => {
+        const text = "ABC. abca";
+        const letter = ".";
+        const total = getLetterCount(text, letter);
+        expect(total).toStrictEqual(1);
+    })
+
+    test("should return 0 if the character is not present in text", () => {
+        const text = "ABC. abca";
+        const letter = "Z";
+        const total = getLetterCount(text, letter);
+        expect(total).toStrictEqual(0);
+    })
+})
 
