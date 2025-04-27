@@ -42,3 +42,15 @@
     flex-shrink: 0;
    }
 }
+
+
+.btn-see-more {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+  outline: transparent;
+  color: inherit;
+}
