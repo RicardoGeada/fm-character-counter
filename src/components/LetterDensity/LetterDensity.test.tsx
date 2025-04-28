@@ -29,7 +29,7 @@ describe("LetterDensity component", () => {
     });
   });
 
-  describe("See more button behaviiour", () => {
+  describe("See more button behaviour", () => {
     test("should render only 5 letter items by default when there are more than 5 unique characters", () => {
       render(<LetterDensity text="ABCDEF" />);
       const items = screen.getAllByRole("listitem");
@@ -38,32 +38,39 @@ describe("LetterDensity component", () => {
 
     test("should render all letter items after clicking 'See more'", () => {
       render(<LetterDensity text="ABCDEF" />);
-      const button = screen.getByRole("button", { name: /see more/i });
-      fireEvent.click(button);
+      const seeMoreButton = screen.getByRole("button", { name: /show more letters/i });
+      fireEvent.click(seeMoreButton);
       const items = screen.getAllByRole("listitem");
       expect(items.length).toBe(6);
     });
 
     test("should display 'See more' button if there are more than 5 unique letters", () => {
       render(<LetterDensity text="ABCDEF" />);
-      const button = screen.getByRole("button", { name: /see more/i });
-      expect(button).toBeInTheDocument();
+      const seeMoreButton = screen.getByRole("button", { name: /show more letters/i });
+      expect(seeMoreButton).toBeInTheDocument();
     });
 
     test("should not display 'See more' button if there are 5 or fewer unique letters", () => {
       render(<LetterDensity text="ABCD" />);
-      const button = screen.queryByRole("button", { name: /see more/i });
-      expect(button).toBeNull();
+      const seeMoreButton = screen.queryByRole("button", { name: /show more letters/i });
+      expect(seeMoreButton).toBeNull();
     });
 
     test("should toggle between 'See more' and 'See less' when the button is clicked", () => {
-        render(<LetterDensity text="ABCDEF" />);
-        const button = screen.getByRole("button", { name: /see more/i });
-        fireEvent.click(button);
-        expect(screen.getByRole("button", { name: /see less/i })).toBeInTheDocument();
-        fireEvent.click(screen.getByRole("button", { name: /see less/i }));
-        expect(screen.getByRole("button", { name: /see more/i })).toBeInTheDocument();
-      });
+      render(<LetterDensity text="ABCDEF" />);
+      
+      const seeMoreButton = screen.getByRole("button", { name: /show more letters/i });
+      fireEvent.click(seeMoreButton);
+    
+      const seeLessButton = screen.getByRole("button", { name: /show fewer letters/i });
+      expect(seeLessButton).toBeInTheDocument();
+    
+      fireEvent.click(seeLessButton);
+    
+      const seeMoreButtonAgain = screen.getByRole("button", { name: /show more letters/i });
+      expect(seeMoreButtonAgain).toBeInTheDocument();
+    });
+    
   });
 
 });

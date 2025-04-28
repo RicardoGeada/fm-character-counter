@@ -25,7 +25,7 @@ function App() {
     <div className="content">
       <Header />
 
-      <main className="main-content">
+      <main className="main-content" role="main">
         <h1 className="headline text-1">Analyze your text in real-time.</h1>
 
         <Textarea
@@ -41,19 +41,19 @@ function App() {
             Text Statistics
           </h2>
           <dl className="stat-container">
-            <div className="stat--total-characters">
+            <div className="stat--total-characters" role="group">
               <dt className="stat-value">{totalCharacters}</dt>
               <dd className="stat-title">
                 Total Characters {excludeSpaces ? "(no space)" : ""}
               </dd>
             </div>
 
-            <div className="stat--word-count">
+            <div className="stat--word-count" role="group">
               <dt className="stat-value">{wordCount}</dt>
               <dd className="stat-title">Word Count</dd>
             </div>
 
-            <div className="stat--sentence-count">
+            <div className="stat--sentence-count" role="group">
               <dt className="stat-value">{sentenceCount}</dt>
               <dd className="stat-title">Sentence Count</dd>
             </div>

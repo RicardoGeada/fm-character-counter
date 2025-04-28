@@ -9,7 +9,7 @@ const config: Config = {
   },
   moduleNameMapper: {
     '\\.module\\.(css|scss|sass)$': 'identity-obj-proxy',
-    '\\.(css|scss|sass)$': '<rootDir>/__mocks__/styleMock.js',
+    '\\.(css|scss|sass)$': '<rootDir>/test/mocks/styleMock.js',
     "\\.(gif|ttf|eot|svg|png)$": "<rootDir>/test/mocks/fileMock.js",
   },
 };
