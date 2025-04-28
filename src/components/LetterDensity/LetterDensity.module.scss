@@ -53,4 +53,9 @@
   border: none;
   outline: transparent;
   color: inherit;
+
+  &:hover,
+  &:focus{
+    color: var(--color-purple-400);
+  }
 }

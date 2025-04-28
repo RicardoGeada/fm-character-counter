@@ -1,54 +1,66 @@
-# React + TypeScript + Vite
+# Frontend Mentor - Character counter solution
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a solution to the [Character counter challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/character-counter-znSgeWs_i6). Frontend Mentor challenges help you improve your coding skills by building realistic projects. 
 
-Currently, two official plugins are available:
+## Table of contents
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Overview](#overview)
+  - [The challenge](#the-challenge)
+  - [Screenshot](#screenshot)
+  - [Links](#links)
+- [My process](#my-process)
+  - [Built with](#built-with)
+  - [What I learned](#what-i-learned)
+  - [Continued development](#continued-development)
+- [Author](#author)
 
-## Expanding the ESLint configuration
+**Note: Delete this note and update the table of contents based on what sections you keep.**
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Overview
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+### The challenge
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Users should be able to:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- Analyze the character, word, and sentence counts for their text
+- Exclude/Include spaces in their character count
+- Set a character limit
+- Receive a warning message if their text exceeds their character limit
+- See the approximate reading time of their text
+- Analyze the letter density of their text
+- Select their color theme
+- View the optimal layout for the interface depending on their device's screen size
+- See hover and focus states for all interactive elements on the page
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+### Screenshot
+
+![](./screenshot.png)
+
+### Links
+
+- Solution URL: [Link](https://github.com/RicardoGeada/fm-character-counter)
+- Live Site URL: [Link](https://character-counter.ricardogeada.com/)
+
+## My process
+
+### Built with
+
+- [React](https://reactjs.org/) - JS library
+- TypeScript
+- SCSS
+- Jest
+- JSDoc
+
+### What I learned
+
+In this project, I deepened my understanding of React, particularly how to use React with TypeScript and SCSS for better type safety and styling. I learned how to write tests using Jest to ensure the reliability of the application, and how to document my code with JSDoc for better maintainability. Additionally, I gained experience in implementing a light and dark mode feature, improving the user experience and accessibility.
+
+### Continued development
+
+I would like to continue working with React and deepen my knowledge of it. Additionally, I aim to further improve my testing skills and expand my understanding of accessibility to build more inclusive applications.
+
+## Author
+
+- Website - [ricardogeada.com](https://www.ricardogeada.com)
+- Frontend Mentor - [@RicardoGeada](https://www.frontendmentor.io/profile/RicardoGeada)
+
